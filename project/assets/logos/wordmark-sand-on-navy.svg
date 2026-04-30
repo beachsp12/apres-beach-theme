@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
-  <rect width="1000" height="600" fill="#1B2C4F"></rect>
-  <g fill="#F1E9D7" font-family="Gatsby Prelude Sans, system-ui, sans-serif" font-weight="400" letter-spacing="6">
-    <text x="500" y="260" text-anchor="middle" font-size="190" style="text-transform:uppercase">APRÈS</text>
-    <text x="500" y="460" text-anchor="middle" font-size="190" style="text-transform:uppercase">BEACH</text>
-  </g>
-</svg>
