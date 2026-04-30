@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Après Beach — Marketing Site UI Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { margin: 0; background: #F1E9D7; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .section { padding: 96px 0; }
+  a { text-decoration: none; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="Nav.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="EyebrowHeader.jsx"></script>
+<script type="text/babel" src="ProductGrid.jsx"></script>
+<script type="text/babel" src="Editorial.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" src="PDP.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const PRODUCTS = [
+  { image: '../../assets/imagery/poolside-secrets.jpg', eyebrow: 'New for spring', name: 'Linen Camp Shirt', price: '€185', description: 'Linen, washed three times before it gets to you. Cut for the 5pm light — collar that holds, sleeve that breathes.' },
+  { image: '../../assets/imagery/sttropez.jpg', eyebrow: 'The Harbor edit', name: 'Demi-Boat Trouser', price: '€240', description: 'Wide-cut linen trouser with a single back pocket and a clean break at the ankle. Drawstring waist, pleated front. Cut for the 5pm light.' },
+  { image: '../../assets/imagery/colourful-crew.jpg', eyebrow: 'Knitwear', name: 'Maritime Polo', price: '€165' },
+  { image: '../../assets/imagery/kaufmann-desert-house.jpg', eyebrow: 'Swim', name: 'Pavilion Swim Brief', price: '€95' },
+  { image: '../../assets/imagery/palm-beach-society.jpg', eyebrow: 'Accessories', name: 'Sun Boater Hat', price: '€140' },
+  { image: '../../assets/imagery/desert-house-party.jpg', eyebrow: 'Knitwear', name: 'Cardigan, off-white', price: '€295' },
+  { image: '../../assets/imagery/von-oswald-house.jpg', eyebrow: 'The Terrace edit', name: 'Long Linen Dress', price: '€340' },
+  { image: '../../assets/imagery/helen-dzo-dzo-kaptur.jpg', eyebrow: 'Accessories', name: 'Silk Carré, navy', price: '€120' },
+];
+
+function App() {
+  const [view, setView] = useState('home'); // home | shop | lookbook | journal | about | pdp
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  function nav(id) {
+    if (id === 'home') setView('home');
+    else setView(id);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function openProduct(p) {
+    setSelectedProduct(p);
+    setView('pdp');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  return (
+    <>
+      <Nav current={view} onNavigate={nav} />
+
+      {view === 'home' && (
+        <>
+          <Hero
+            image="../../assets/imagery/sttropez.jpg"
+            eyebrow="Spring · MMXXVI · After the swim"
+            title={<>Après<br/>Beach</>}
+            copy="Linen, swim, and easy knits for the hours between the water and the table."
+            cta="Shop the edit"
+            onCta={() => nav('shop')}
+          />
+
+          <section className="section">
+            <div className="container">
+              <EyebrowHeader
+                eyebrow="The After-Swim Edit"
+                title={<>Cut for the<br/>5pm light</>}
+                copy="Twelve pieces. Linen washed three times before it gets to you. Tailored to wear loose."
+              />
+              <div style={{ marginTop: 64 }}>
+                <ProductGrid products={PRODUCTS.slice(0, 4)} onProduct={openProduct} />
+              </div>
+            </div>
+          </section>
+
+          <section style={{ background: '#1B2C4F', color: '#F1E9D7' }} className="section">
+            <div className="container">
+              <Editorial
+                image="../../assets/imagery/kaufmann-desert-house.jpg"
+                eyebrow="Journal · No. 04"
+                title={<>A weekend<br/>at the Kaufmann</>}
+                copy="On parasol scallops, terrazzo at noon, and the case for arriving an hour before the table is set. The full piece in our spring journal."
+                link="Read the journal"
+              />
+            </div>
+          </section>
+
+          <section className="section">
+            <div className="container">
+              <EyebrowHeader eyebrow="The harbor edit" title={<>For the hours<br/>by the water</>} />
+              <div style={{ marginTop: 64 }}>
+                <ProductGrid products={PRODUCTS.slice(4, 8)} onProduct={openProduct} />
+              </div>
+            </div>
+          </section>
+
+          <section className="section" style={{ paddingBottom: 0 }}>
+            <div className="container">
+              <Editorial
+                reverse
+                image="../../assets/imagery/poolside-secrets.jpg"
+                eyebrow="The Maison"
+                title={<>For the hour<br/>between water<br/>and table</>}
+                copy="Elevated essentials for seaside days and sunset social moments. Four collections a year, made in small numbers."
+                link="Our story"
+              />
+            </div>
+          </section>
+        </>
+      )}
+
+      {view === 'shop' && (
+        <div style={{ paddingTop: 96 }}>
+          <section className="section">
+            <div className="container">
+              <EyebrowHeader eyebrow="Spring MMXXVI" title="Shop" copy="Twelve pieces. Linen, swim, knits, accessories." />
+              <div style={{ marginTop: 64 }}>
+                <ProductGrid products={PRODUCTS} onProduct={openProduct} />
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {view === 'lookbook' && (
+        <div style={{ paddingTop: 96 }}>
+          <section style={{ paddingTop: 64 }}>
+            <div className="container">
+              <EyebrowHeader eyebrow="Spring MMXXVI" title="The Lookbook" copy="Photographed at the desert house, the harbor, and the pool — at the hour the light goes long." align="center" />
+            </div>
+            <div style={{ marginTop: 64, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}>
+              {[
+                'sttropez', 'kaufmann-desert-house', 'palm-beach-debutantes',
+                'colourful-crew', 'esther-williams-florida', 'von-oswald-house',
+                'palm-beach-society', 'helen-dzo-dzo-kaptur',
+              ].map(slug => (
+                <div key={slug} style={{ aspectRatio: '4/5', background: `url(../../assets/imagery/${slug}.jpg) center/cover` }} />
+              ))}
+            </div>
+          </section>
+        </div>
+      )}
+
+      {view === 'journal' && (
+        <div style={{ paddingTop: 120 }}>
+          <section className="section">
+            <div className="container">
+              <EyebrowHeader eyebrow="The Journal" title={<>Notes from<br/>the maison</>} />
+              <div style={{ marginTop: 64, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64 }}>
+                {[
+                  { img: 'kaufmann-desert-house', no: '04', title: 'A weekend at the desert house', dek: 'On parasol scallops and the case for arriving an hour early.' },
+                  { img: 'sttropez', no: '03', title: 'The Harbor at five', dek: 'Where to eat when the boats come in.' },
+                  { img: 'esther-williams-florida', no: '02', title: 'Esther, in Florida', dek: 'A short film for the Florida swim collection.' },
+                  { img: 'palm-beach-debutantes', no: '01', title: 'On the porch', dek: 'A note on linen, pleating, and the white iron chair.' },
+                ].map(j => (
+                  <article key={j.no} style={{ cursor: 'pointer' }}>
+                    <div style={{ aspectRatio: '4/3', background: `url(../../assets/imagery/${j.img}.jpg) center/cover`, marginBottom: 20 }} />
+                    <div style={{
+                      fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase',
+                      color: 'rgba(27,44,79,0.6)', fontWeight: 500,
+                    }}>Journal · No. {j.no}</div>
+                    <h3 style={{
+                      fontFamily: 'Gatsby Prelude Sans, system-ui',
+                      fontSize: 32, lineHeight: 1.05, letterSpacing: '-0.01em',
+                      textTransform: 'uppercase', margin: '12px 0', fontWeight: 400, color: '#1B2C4F',
+                    }}>{j.title}</h3>
+                    <p style={{ fontSize: 16, lineHeight: 1.55, color: 'rgba(27,44,79,0.75)' }}>{j.dek}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {view === 'about' && (
+        <div style={{ paddingTop: 120 }}>
+          <section className="section">
+            <div className="container" style={{ maxWidth: 760 }}>
+              <EyebrowHeader eyebrow="The Maison" title={<>We make linen<br/>for after the swim</>} align="center" />
+              <p style={{ fontSize: 19, lineHeight: 1.7, marginTop: 48, color: 'rgba(27,44,79,0.85)' }}>
+                Après Beach is a small house. Four collections a year. Two colors, mostly. We work in linen, cotton, and a little silk — fabrics that get better in the sun and hold their shape after the swim.
+              </p>
+              <p style={{ fontSize: 19, lineHeight: 1.7, marginTop: 24, color: 'rgba(27,44,79,0.85)' }}>
+                The brand is named for the hour between the water and the table. The hour we dress for.
+              </p>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {view === 'pdp' && selectedProduct && (
+        <PDP product={selectedProduct} onBack={() => nav('shop')} onAddToBag={() => alert('Added to bag (mock)')} />
+      )}
+
+      <Footer />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Buttons</title><link rel="stylesheet" href="_card.css"></head>
+<body>
+<style>
+.btn{font-family:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:14px 28px;border:1px solid transparent;border-radius:2px;cursor:pointer;font-weight:500;transition:all .14s cubic-bezier(.22,.61,.36,1)}
+.btn-primary{background:#1B2C4F;color:#F1E9D7}
+.btn-primary.hover{background:#131F39}
+.btn-primary.active{background:#0C1528}
+.btn-primary.disabled{background:rgba(27,44,79,.24);color:rgba(241,233,215,.6);cursor:not-allowed}
+.btn-ghost{background:transparent;color:#1B2C4F;border-color:#1B2C4F}
+.btn-ghost.hover{background:rgba(27,44,79,.12)}
+</style>
+<div class="card">
+  <div class="card-eyebrow">Buttons · Tonal states only — no lift, no scale</div>
+  <div class="col" style="gap:14px">
+    <div class="row" style="gap:10px;align-items:center">
+      <button class="btn btn-primary">Add to bag</button>
+      <button class="btn btn-primary hover">Add to bag</button>
+      <button class="btn btn-primary active">Add to bag</button>
+      <button class="btn btn-primary disabled">Add to bag</button>
+      <span class="label-mono" style="margin-left:6px">Default · Hover · Pressed · Disabled</span>
+    </div>
+    <div class="row" style="gap:10px;align-items:center">
+      <button class="btn btn-ghost">Shop the look</button>
+      <button class="btn btn-ghost hover">Shop the look</button>
+      <span class="label-mono" style="margin-left:6px">Ghost — alt CTA, never used as primary</span>
+    </div>
+  </div>
+</div>
+</body></html>

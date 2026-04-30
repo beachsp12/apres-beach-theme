@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#F1E9D7"></rect>
+  <g fill="#1B2C4F" font-family="Gatsby Prelude Sans, system-ui, sans-serif" font-weight="400" letter-spacing="2">
+    <text x="100" y="120" text-anchor="middle" font-size="110" style="text-transform:uppercase">AB</text>
+  </g>
+</svg>

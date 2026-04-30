@@ -1,0 +1,226 @@
+/* =============================================================
+   APRÈS BEACH — Design Tokens
+   The two-color rule. Navy and sand do every job.
+   ============================================================= */
+
+@font-face {
+  font-family: "Gatsby Prelude Sans";
+  src: url("fonts/GatsbyPreludeSans.otf") format("opentype"),
+       url("../fonts/GatsbyPreludeSans.otf") format("opentype"),
+       url("../../fonts/GatsbyPreludeSans.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body fallback — Gatsby Prelude Sans is a display face only.
+   Until the brand selects a body partner, we pair with Söhne-style
+   neutral grotesk via Inter as the closest open-source substitute.
+   FLAGGED: confirm body type pairing with brand. */
+@font-face {
+  font-family: "AB Body Fallback";
+  src: local("Söhne"), local("Inter"), local("Helvetica Neue"), local("Arial");
+}
+
+:root {
+  /* ---------- CORE PALETTE — The Two ---------- */
+  /* Navy — PMS 289 C. Carries warmth. Never #000.
+     Madeira 1043 thread reference for embroidery. */
+  --ab-navy:        #1B2C4F;
+  --ab-navy-soft:   #2A3D62;   /* tonal hover on navy surface */
+  --ab-navy-deep:   #131F39;   /* tonal active / pressed */
+  --ab-navy-12:     rgba(27, 44, 79, 0.12);
+  --ab-navy-24:     rgba(27, 44, 79, 0.24);
+  --ab-navy-60:     rgba(27, 44, 79, 0.60);
+
+  /* Sand — unbleached linen. Never #FFF.
+     Holds warmth — bias warm 100–200K vs neutral. */
+  --ab-sand:        #F1E9D7;
+  --ab-sand-soft:   #E7DDC6;   /* tonal hover on sand surface */
+  --ab-sand-deep:   #DCD0B4;   /* tonal active / divider */
+  --ab-sand-12:     rgba(241, 233, 215, 0.12);
+  --ab-sand-24:     rgba(241, 233, 215, 0.24);
+  --ab-sand-60:     rgba(241, 233, 215, 0.60);
+
+  /* ---------- SEASONAL ACCENTS — Guests Only ----------
+     Use in styling, fabric, editorial photography only.
+     Never on wordmark, icon lockup, primary CTA, or system surfaces.
+     If an accent shows on a button or header, it is wrong. */
+  --ab-accent-coral:     #C95A4A;   /* sun-faded red, terra */
+  --ab-accent-turquoise: #4A8A93;   /* pool shadow */
+  --ab-accent-sage:      #8A9A7B;   /* dune grass */
+
+  /* ---------- SEMANTIC TOKENS ----------
+     Backgrounds are sand or navy. Text is the opposite.
+     Hover/active/disabled = tonal shifts. No new hues. */
+
+  /* Surfaces */
+  --bg-primary:        var(--ab-sand);
+  --bg-inverse:        var(--ab-navy);
+  --bg-raised:         var(--ab-sand-soft);    /* card on sand */
+  --bg-raised-inverse: var(--ab-navy-soft);    /* card on navy */
+  --bg-sunk:           var(--ab-sand-deep);    /* input wells */
+
+  /* Foreground */
+  --fg1:              var(--ab-navy);          /* primary text on sand */
+  --fg2:              var(--ab-navy-60);       /* secondary text */
+  --fg-inverse-1:     var(--ab-sand);          /* primary text on navy */
+  --fg-inverse-2:     var(--ab-sand-60);       /* secondary on navy */
+
+  /* Lines / dividers — tonal, never gray */
+  --line:             var(--ab-navy-12);
+  --line-strong:      var(--ab-navy-24);
+  --line-inverse:     var(--ab-sand-24);
+
+  /* Interaction states — tonal only */
+  --cta-bg:           var(--ab-navy);
+  --cta-fg:           var(--ab-sand);
+  --cta-bg-hover:     var(--ab-navy-deep);
+  --cta-bg-active:    #0C1528;
+  --cta-bg-disabled:  var(--ab-navy-24);
+  --cta-fg-disabled:  var(--ab-sand-60);
+
+  --cta-ghost-fg:        var(--ab-navy);
+  --cta-ghost-border:    var(--ab-navy);
+  --cta-ghost-bg-hover:  var(--ab-navy-12);
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: "Gatsby Prelude Sans", "AB Body Fallback", system-ui, sans-serif;
+  --font-body:    "AB Body Fallback", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  /* ---------- TYPE SCALE ----------
+     Display face is wide-set, all-caps friendly, condensed feel.
+     Use generous letter-spacing on caps; tighten on long display. */
+  --fs-display-xl: clamp(64px, 9vw, 144px);
+  --fs-display-l:  clamp(48px, 6vw, 96px);
+  --fs-display-m:  clamp(36px, 4.5vw, 64px);
+  --fs-display-s:  clamp(28px, 3vw, 40px);
+
+  --fs-eyebrow:    12px;
+  --fs-body-l:     19px;
+  --fs-body:       16px;
+  --fs-body-s:     14px;
+  --fs-caption:    12px;
+
+  /* Tracking */
+  --track-display:   -0.01em;
+  --track-headline:  0;
+  --track-eyebrow:   0.18em;
+  --track-button:    0.14em;
+  --track-body:      0;
+
+  /* Leading */
+  --lh-display:  0.95;
+  --lh-headline: 1.05;
+  --lh-body:     1.55;
+  --lh-tight:    1.2;
+
+  /* ---------- SPACING (8pt grid, with 4pt halfsteps) ---------- */
+  --sp-0:  0;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- RADII ----------
+     Restrained. The brand reads tailored, not bubbly.
+     Capsules reserved for tags / pills only. */
+  --radius-0:    0;
+  --radius-1:    2px;   /* inputs, cards */
+  --radius-2:    4px;   /* modal, image crop */
+  --radius-pill: 999px; /* tags, status pills only */
+
+  /* ---------- SHADOWS ----------
+     Almost none. The brand sits flat.
+     When elevation is needed, use warm navy at low alpha. */
+  --shadow-0:  none;
+  --shadow-1:  0 1px 2px rgba(27, 44, 79, 0.06);
+  --shadow-2:  0 8px 24px rgba(27, 44, 79, 0.10);
+  --shadow-3:  0 24px 60px rgba(27, 44, 79, 0.18);
+
+  /* ---------- MOTION ----------
+     Slow, considered, no bounce. Linen falls; it does not snap. */
+  --ease-linen: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast:   140ms;
+  --dur-base:   240ms;
+  --dur-slow:   480ms;
+
+  /* ---------- LAYOUT ---------- */
+  --container-max: 1280px;
+  --gutter:        32px;
+  --col-gap:       24px;
+}
+
+/* =============================================================
+   SEMANTIC ELEMENT STYLES
+   ============================================================= */
+
+html, body {
+  background: var(--bg-primary);
+  color: var(--fg1);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.ab-display-xl,
+.ab-display-l,
+.ab-display-m,
+.ab-display-s,
+h1.ab, h2.ab, h3.ab {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-display);
+  text-transform: uppercase;
+  color: var(--fg1);
+}
+
+.ab-display-xl { font-size: var(--fs-display-xl); line-height: var(--lh-display); }
+.ab-display-l  { font-size: var(--fs-display-l);  line-height: var(--lh-display); }
+.ab-display-m  { font-size: var(--fs-display-m);  line-height: var(--lh-headline); }
+.ab-display-s  { font-size: var(--fs-display-s);  line-height: var(--lh-headline); }
+
+h1.ab { font-size: var(--fs-display-l); }
+h2.ab { font-size: var(--fs-display-m); }
+h3.ab { font-size: var(--fs-display-s); }
+
+.ab-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg2);
+}
+
+.ab-body-l { font-size: var(--fs-body-l); line-height: var(--lh-body); }
+.ab-body   { font-size: var(--fs-body);   line-height: var(--lh-body); }
+.ab-body-s { font-size: var(--fs-body-s); line-height: var(--lh-body); }
+.ab-caption{ font-size: var(--fs-caption);line-height: 1.4; color: var(--fg2); }
+
+.ab-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: opacity var(--dur-fast) var(--ease-linen);
+}
+.ab-link:hover { opacity: 0.7; }
+
+/* Inverse surface — flip everything */
+.ab-inverse {
+  background: var(--bg-inverse);
+  color: var(--fg-inverse-1);
+}
+.ab-inverse .ab-eyebrow { color: var(--fg-inverse-2); }
+.ab-inverse .ab-caption { color: var(--fg-inverse-2); }
