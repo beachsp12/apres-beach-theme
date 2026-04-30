@@ -1,0 +1,125 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign product_count = section.settings.product_count | default: 4
+-%}
+
+<section class="section{% if section.settings.background == 'navy' %} section--navy{% endif %}">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank or section.settings.title != blank -%}
+      <div class="section-header{% if section.settings.align_center %} section-header--center{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="eyebrow section-header__eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="display-m section-header__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.copy != blank -%}
+          <p class="section-header__copy">{{ section.settings.copy }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-grid mt-8">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: product_count -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..product_count) -%}
+          <div class="product-card">
+            <div class="product-card__image-wrap" style="background:var(--ab-sand-soft);"></div>
+            <div class="product-card__eyebrow">The Edit</div>
+            <div class="product-card__name-price">
+              <span class="product-card__name">Product {{ i }}</span>
+              <span class="product-card__price">—</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div style="margin-top:48px; text-align:center;">
+        <a
+          href="{{ section.settings.cta_url | default: collection.url | default: routes.collections_url }}"
+          class="btn btn--{% if section.settings.background == 'navy' %}sand{% else %}ghost{% endif %}"
+        >{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "sand", "label": "Sand (default)" },
+        { "value": "navy", "label": "Navy" }
+      ],
+      "default": "sand"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The After-Swim Edit"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Cut for the 5pm light"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Supporting copy"
+    },
+    {
+      "type": "checkbox",
+      "id": "align_center",
+      "label": "Center-align header",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_count",
+      "label": "Number of products",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "settings": {
+        "eyebrow": "The After-Swim Edit",
+        "title": "Cut for the 5pm light",
+        "product_count": 4
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,104 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Après Beach",
+    "theme_version": "1.0.0",
+    "theme_author": "Après Beach Maison",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand palette",
+        "info": "Après Beach uses the two-color rule: navy and sand only. These should not need changing."
+      },
+      {
+        "type": "color",
+        "id": "color_navy",
+        "label": "Navy",
+        "default": "#1B2C4F",
+        "info": "PMS 289 C. Never pure black."
+      },
+      {
+        "type": "color",
+        "id": "color_sand",
+        "label": "Sand",
+        "default": "#F1E9D7",
+        "info": "Unbleached linen. Never pure white."
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Display face",
+        "info": "Gatsby Prelude Sans is loaded from the theme assets. It is used for all headlines and the wordmark."
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body font",
+        "default": "helvetica_neue_n4"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width (px)",
+        "min": 1000,
+        "max": 1600,
+        "step": 40,
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "label": "Space between sections (px)",
+        "min": 40,
+        "max": 128,
+        "step": 8,
+        "default": 96
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "32×32px recommended."
+      }
+    ]
+  }
+]

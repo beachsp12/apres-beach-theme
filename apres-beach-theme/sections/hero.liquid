@@ -1,0 +1,101 @@
+<section class="hero">
+  {%- if section.settings.image != blank -%}
+    <img
+      class="hero__image"
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      srcset="
+        {{ section.settings.image | image_url: width: 800 }} 800w,
+        {{ section.settings.image | image_url: width: 1200 }} 1200w,
+        {{ section.settings.image | image_url: width: 1600 }} 1600w,
+        {{ section.settings.image | image_url: width: 2400 }} 2400w
+      "
+      sizes="100vw"
+      alt="{{ section.settings.image.alt | escape }}"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+    >
+  {%- else -%}
+    <div class="hero__image" style="background:#1B2C4F;"></div>
+  {%- endif -%}
+
+  <div class="hero__gradient"></div>
+
+  <div class="hero__content">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="hero__eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="hero__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.copy != blank -%}
+        <p class="hero__copy">{{ section.settings.copy }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a
+        href="{{ section.settings.cta_url | default: routes.collections_url }}"
+        class="btn btn--sand"
+      >{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Spring · MMXXVI · After the swim"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "Après Beach"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Supporting copy",
+      "default": "Linen, swim, and easy knits for the hours between the water and the table."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button text",
+      "default": "Shop the edit"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "settings": {
+        "eyebrow": "Spring · MMXXVI · After the swim",
+        "title": "Après Beach",
+        "copy": "Linen, swim, and easy knits for the hours between the water and the table.",
+        "cta_label": "Shop the edit"
+      }
+    }
+  ]
+}
+{% endschema %}

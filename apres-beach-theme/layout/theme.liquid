@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F1E9D7">
+
+  <title>
+    {%- if request.page_type == 'index' -%}
+      {{ shop.name }}{% if shop.description %} — {{ shop.description }}{% endif %}
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  {{ content_for_head }}
+
+  {{- 'theme.css' | asset_url | stylesheet_tag -}}
+  <link rel="preload" as="font" href="{{ 'GatsbyPreludeSans.otf' | asset_url }}" type="font/otf" crossorigin>
+
+  <script>
+    // Expose cart count immediately — avoids flash
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+</head>
+
+<body>
+  <a class="visually-hidden" href="#main-content">Skip to content</a>
+
+  {%- section 'header' -%}
+
+  <nav class="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="mobile-menu__close" aria-label="Close menu">✕</button>
+    <a class="mobile-menu__link" href="{{ routes.root_url }}">Home</a>
+    {%- for link in linklists.main-menu.links -%}
+      <a class="mobile-menu__link" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+    <a class="mobile-menu__link" href="{{ routes.cart_url }}">Bag</a>
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

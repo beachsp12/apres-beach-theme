@@ -1,0 +1,40 @@
+<div class="article-page">
+  <div class="container">
+    <div class="article-page__header">
+      <div class="article-page__meta">
+        <a href="{{ blog.url }}" class="link-underline">{{ blog.title }}</a>
+        · {{ article.published_at | date: '%B %d, %Y' }}
+      </div>
+      <h1 class="article-page__title">{{ article.title }}</h1>
+    </div>
+
+    {%- if article.image -%}
+      <div class="article-page__image-wrap">
+        <img
+          src="{{ article.image | image_url: width: 1600 }}"
+          srcset="
+            {{ article.image | image_url: width: 800 }} 800w,
+            {{ article.image | image_url: width: 1200 }} 1200w,
+            {{ article.image | image_url: width: 1600 }} 1600w
+          "
+          sizes="100vw"
+          alt="{{ article.image.alt | escape }}"
+          loading="eager"
+          width="1600"
+          height="900"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="article-page__body">
+      {{ article.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

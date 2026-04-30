@@ -1,0 +1,148 @@
+<div class="product-page">
+  <div class="container">
+    <a href="{{ product.collections.first.url | default: routes.collections_url }}" class="product-page__back">
+      ← Back to shop
+    </a>
+
+    <div class="product-page__inner">
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- assign first_image = product.featured_image -%}
+          <img
+            id="product-main-image"
+            src="{{ first_image | image_url: width: 900 }}"
+            srcset="
+              {{ first_image | image_url: width: 600 }} 600w,
+              {{ first_image | image_url: width: 900 }} 900w,
+              {{ first_image | image_url: width: 1200 }} 1200w
+            "
+            sizes="(max-width: 768px) 100vw, 55vw"
+            alt="{{ first_image.alt | escape }}"
+            loading="eager"
+            width="900"
+            height="1125"
+          >
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images limit: 6 -%}
+              <div
+                class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                data-src="{{ image | image_url: width: 900 }}"
+                data-alt="{{ image.alt | escape }}"
+                role="button"
+                tabindex="0"
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 300 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="300"
+                  height="375"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Buy box -->
+      <div class="product-buybox">
+        {%- if product.type != blank -%}
+          <div class="product-buybox__eyebrow">{{ product.type }}</div>
+        {%- endif -%}
+
+        <h1 class="product-buybox__title">{{ product.title }}</h1>
+
+        <div class="product-buybox__price">
+          {%- if product.compare_at_price > product.price -%}
+            <s style="opacity:0.5;margin-right:8px;">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+          {{ product.price | money }}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="product-buybox__description">{{ product.description }}</div>
+        {%- endif -%}
+
+        <form class="product-buybox__form" action="/cart/add" method="post" enctype="multipart/form-data">
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div style="margin-top:var(--sp-7);">
+                <div class="product-buybox__section-label">{{ option.name }}</div>
+
+                {%- if option.name == 'Size' or option.name == 'size' -%}
+                  <div class="size-grid">
+                    {%- for value in option.values -%}
+                      {%- assign variant = product.variants | where: 'option1', value | first -%}
+                      {%- if option.position == 2 -%}
+                        {%- assign variant = product.variants | where: 'option2', value | first -%}
+                      {%- elsif option.position == 3 -%}
+                        {%- assign variant = product.variants | where: 'option3', value | first -%}
+                      {%- endif -%}
+                      <button
+                        type="button"
+                        class="size-btn{% if forloop.first %} is-selected{% endif %}"
+                        data-variant-id="{{ variant.id }}"
+                        data-available="{{ variant.available }}"
+                        aria-label="{{ option.name }}: {{ value }}"
+                      >{{ value }}</button>
+                    {%- endfor -%}
+                  </div>
+                  <a href="#size-guide" class="link-underline" style="display:inline-block;margin-top:var(--sp-3);font-size:var(--fs-body-s);color:var(--fg2);">Size guide</a>
+                {%- else -%}
+                  <select name="options[{{ option.name | escape }}]" style="margin-top:var(--sp-3);border:1px solid var(--line-strong);background:transparent;padding:10px 14px;border-radius:var(--radius-1);color:var(--fg1);width:100%;">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <button
+            type="submit"
+            class="btn btn--primary btn--full"
+            style="margin-top:var(--sp-6);"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+          >
+            {%- if product.selected_or_first_available_variant.available -%}
+              Add to bag
+            {%- else -%}
+              Sold out
+            {%- endif -%}
+          </button>
+        </form>
+
+        <div class="product-buybox__meta">
+          {%- if product.metafields.custom.materials != blank -%}
+            {{ product.metafields.custom.materials }} ·
+          {%- endif -%}
+          Free shipping over
+          {{ 200 | money }}
+          · 30-day returns
+        </div>
+
+        {%- if product.metafields.descriptors.care_guide != blank -%}
+          <details style="margin-top:var(--sp-6);border-top:1px solid var(--line);padding-top:var(--sp-5);">
+            <summary style="cursor:pointer;font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:var(--track-eyebrow);text-transform:uppercase;list-style:none;">Care</summary>
+            <p style="margin-top:var(--sp-3);font-size:var(--fs-body-s);line-height:var(--lh-body);color:var(--fg2);">{{ product.metafields.descriptors.care_guide }}</p>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

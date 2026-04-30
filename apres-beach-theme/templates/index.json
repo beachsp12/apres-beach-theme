@@ -1,0 +1,63 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Spring · MMXXVI · After the swim",
+        "title": "Après Beach",
+        "copy": "Linen, swim, and easy knits for the hours between the water and the table.",
+        "cta_label": "Shop the edit"
+      }
+    },
+    "featured-collection-1": {
+      "type": "featured-collection",
+      "settings": {
+        "background": "sand",
+        "eyebrow": "The After-Swim Edit",
+        "title": "Cut for the 5pm light",
+        "copy": "Twelve pieces. Linen washed three times before it gets to you. Tailored to wear loose.",
+        "product_count": 4
+      }
+    },
+    "editorial-1": {
+      "type": "editorial",
+      "settings": {
+        "background": "navy",
+        "reverse": false,
+        "eyebrow": "Journal · No. 04",
+        "title": "A weekend at the desert house",
+        "copy": "On parasol scallops, terrazzo at noon, and the case for arriving an hour before the table is set. The full piece in our spring journal.",
+        "link_label": "Read the journal",
+        "link_url": "/blogs/journal"
+      }
+    },
+    "featured-collection-2": {
+      "type": "featured-collection",
+      "settings": {
+        "background": "sand",
+        "eyebrow": "The harbor edit",
+        "title": "For the hours by the water",
+        "product_count": 4
+      }
+    },
+    "editorial-2": {
+      "type": "editorial",
+      "settings": {
+        "background": "sand",
+        "reverse": true,
+        "eyebrow": "The Maison",
+        "title": "For the hour between water and table",
+        "copy": "Elevated essentials for seaside days and sunset social moments. Four collections a year, made in small numbers.",
+        "link_label": "Our story",
+        "link_url": "/pages/maison"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection-1",
+    "editorial-1",
+    "featured-collection-2",
+    "editorial-2"
+  ]
+}

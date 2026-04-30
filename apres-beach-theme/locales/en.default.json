@@ -1,0 +1,51 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Password",
+      "login_form_submit": "Enter",
+      "login_prompt": "Have a password?"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to bag",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "On sale",
+      "quantity": "Quantity",
+      "size": "Size",
+      "size_guide": "Size guide"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your bag",
+      "empty": "Your bag is empty",
+      "empty_continue": "Shop the edit",
+      "checkout": "Proceed to checkout",
+      "item_count_one": "1 item",
+      "item_count_other": "{{ count }} items",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "shipping_note": "Taxes and shipping calculated at checkout."
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found in this collection."
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "shopping_bag": "Shopping bag"
+  }
+}

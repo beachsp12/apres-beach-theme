@@ -1,0 +1,72 @@
+<header class="site-header" role="banner">
+  <nav class="site-header__nav" aria-label="Left navigation">
+    {%- for link in linklists.main-menu.links limit: 2 -%}
+      <a
+        href="{{ link.url }}"
+        class="site-header__nav-link"
+        {% if link.active %}aria-current="page"{% endif %}
+      >{{ link.title }}</a>
+    {%- else -%}
+      <a href="{{ routes.collections_url }}" class="site-header__nav-link">Shop</a>
+      <a href="/pages/lookbook" class="site-header__nav-link">Lookbook</a>
+    {%- endfor -%}
+  </nav>
+
+  <a href="{{ routes.root_url }}" class="site-header__wordmark" aria-label="{{ shop.name }} — Home">
+    {%- if section.settings.logo != blank -%}
+      <img
+        src="{{ section.settings.logo | image_url: width: 200 }}"
+        alt="{{ shop.name }}"
+        width="{{ section.settings.logo.width | at_most: 200 }}"
+        height="{{ section.settings.logo.height | times: 200 | divided_by: section.settings.logo.width | round }}"
+        loading="eager"
+        style="max-height:36px;width:auto;"
+      >
+    {%- else -%}
+      {{ shop.name }}
+    {%- endif -%}
+  </a>
+
+  <div class="site-header__nav site-header__nav--right">
+    {%- for link in linklists.main-menu.links offset: 2 -%}
+      <a
+        href="{{ link.url }}"
+        class="site-header__nav-link"
+        {% if link.active %}aria-current="page"{% endif %}
+      >{{ link.title }}</a>
+    {%- else -%}
+      <a href="/blogs/journal" class="site-header__nav-link">Journal</a>
+      <a href="/pages/maison" class="site-header__nav-link">Maison</a>
+    {%- endfor -%}
+    <a href="{{ routes.cart_url }}" class="site-header__nav-link" aria-label="Shopping bag">
+      Bag<span class="js-cart-count"></span>
+    </a>
+
+    <button
+      class="site-header__menu-toggle"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="3" y1="7" x2="21" y2="7"/>
+        <line x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Upload your wordmark PNG. Leave blank to show the shop name in Gatsby Prelude Sans."
+    }
+  ]
+}
+{% endschema %}
