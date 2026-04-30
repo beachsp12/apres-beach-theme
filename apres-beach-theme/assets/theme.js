@@ -224,32 +224,3 @@ document.addEventListener('DOMContentLoaded', updateCartCount);
   });
 })();
 
-// ============================================================
-// SMOOTH SECTION REVEAL (simple fade-up on scroll)
-// ============================================================
-(function () {
-  if (!('IntersectionObserver' in window)) return;
-
-  const els = document.querySelectorAll('.section, .product-card, .article-card, .editorial');
-  if (!els.length) return;
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'none';
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08 }
-  );
-
-  els.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(8px)';
-    el.style.transition = `opacity 480ms cubic-bezier(0.22,0.61,0.36,1), transform 480ms cubic-bezier(0.22,0.61,0.36,1)`;
-    observer.observe(el);
-  });
-})();

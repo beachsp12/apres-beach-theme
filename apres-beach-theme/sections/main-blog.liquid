@@ -1,66 +1,67 @@
 <div class="blog-page">
   <div class="container">
     <div class="section">
+
       <div class="section-header">
         <div class="eyebrow section-header__eyebrow">The Journal</div>
         <h1 class="display-m section-header__title">{{ blog.title }}</h1>
       </div>
 
-      <div class="blog-grid">
-        {%- for article in blog.articles -%}
-          <article class="article-card">
-            <a href="{{ article.url }}">
-              {%- if article.image -%}
-                <div class="article-card__image-wrap">
-                  <img
-                    src="{{ article.image | image_url: width: 800 }}"
-                    srcset="
-                      {{ article.image | image_url: width: 400 }} 400w,
-                      {{ article.image | image_url: width: 800 }} 800w,
-                      {{ article.image | image_url: width: 1200 }} 1200w
-                    "
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    alt="{{ article.image.alt | escape }}"
-                    loading="lazy"
-                    width="800"
-                    height="600"
-                  >
+      {%- paginate blog.articles by 10 -%}
+        <div class="blog-grid">
+          {%- for article in blog.articles -%}
+            <article class="article-card">
+              <a href="{{ article.url }}">
+                {%- if article.image -%}
+                  <div class="article-card__image-wrap">
+                    <img
+                      src="{{ article.image | image_url: width: 800 }}"
+                      srcset="
+                        {{ article.image | image_url: width: 400 }} 400w,
+                        {{ article.image | image_url: width: 800 }} 800w,
+                        {{ article.image | image_url: width: 1200 }} 1200w
+                      "
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="{{ article.image.alt | escape }}"
+                      loading="lazy"
+                      width="800"
+                      height="600"
+                    >
+                  </div>
+                {%- endif -%}
+                <div class="article-card__meta">
+                  {{ blog.title }} · {{ article.published_at | date: '%B %Y' }}
                 </div>
-              {%- endif -%}
+                <h2 class="article-card__title">{{ article.title }}</h2>
+                {%- if article.excerpt != blank -%}
+                  <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
+                {%- endif -%}
+              </a>
+            </article>
+          {%- else -%}
+            <p style="grid-column:1/-1;color:var(--fg2);">No journal entries yet.</p>
+          {%- endfor -%}
+        </div>
 
-              <div class="article-card__meta">
-                {{ blog.title }} · {{ article.published_at | date: '%B %Y' }}
-              </div>
-              <h2 class="article-card__title">{{ article.title }}</h2>
-              {%- if article.excerpt != blank -%}
-                <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
-              {%- endif -%}
-            </a>
-          </article>
-        {%- else -%}
-          <p style="grid-column:1/-1;color:var(--fg2);">No journal entries yet.</p>
-        {%- endfor -%}
-      </div>
-
-      {%- if paginate.pages > 1 -%}
-        {%- paginate blog.articles by 10 -%}
-          <nav class="pagination">
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination">
             {%- if paginate.previous -%}
-              <a href="{{ paginate.previous.url }}" class="pagination__item">←</a>
+              <a href="{{ paginate.previous.url }}" class="pagination__item" aria-label="Previous page">←</a>
             {%- endif -%}
             {%- for part in paginate.parts -%}
               {%- if part.is_link -%}
                 <a href="{{ part.url }}" class="pagination__item">{{ part.title }}</a>
               {%- else -%}
-                <span class="pagination__item is-active">{{ part.title }}</span>
+                <span class="pagination__item is-active" aria-current="page">{{ part.title }}</span>
               {%- endif -%}
             {%- endfor -%}
             {%- if paginate.next -%}
-              <a href="{{ paginate.next.url }}" class="pagination__item">→</a>
+              <a href="{{ paginate.next.url }}" class="pagination__item" aria-label="Next page">→</a>
             {%- endif -%}
           </nav>
-        {%- endpaginate -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+
     </div>
   </div>
 </div>
